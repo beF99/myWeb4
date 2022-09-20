@@ -1,0 +1,41 @@
+
+
+<div id="gameBoard">
+    <br>   <br> 
+     <div class="item">  
+              <br>
+
+        <h1>יגעת ומצאת תאמין</h1>
+        <br>
+
+     </div>
+     <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+      <mat-button-toggle value=player1.namePlayer style="background-color:{{player1.colorPlayer}}" (click)="Start(player1)">{{player1.namePlayer}}</mat-button-toggle>
+      <mat-button-toggle value="|">   |  </mat-button-toggle>
+      <mat-button-toggle value=player2.namePlayer style="background-color:{{player2.colorPlayer}}"  (click)="Start(player2)">  {{player2.namePlayer}}</mat-button-toggle>
+    </mat-button-toggle-group>
+    <br><br><br><br>    <br><br>
+
+   
+            <div id="board">
+
+                <span  id="columns"  *ngFor="let item of diskis; index as i; ">  
+                    <span  *ngFor="let item of diskis[i]; index as j; ">
+                        <!-- <span>    -->
+                             <div class="diskit"  style="background-color:{{item.color}}" >  
+                                {{item.id}}
+                          </div>
+                        <!-- </span> -->
+                         
+                </span>
+                <button   *ngIf="disAbleClick==true" mat-fab style="background-color:{{colorButtom}}" (click)="Insert(colorButtom, i)">   {{i}} </button>
+
+
+            </span>
+
+             </div>
+  
+
+
+</div>
+
