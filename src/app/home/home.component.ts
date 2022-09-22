@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DialogGetStartComponent } from '../dialog-get-start/dialog-get-start.component';
 
 
 @Component({
@@ -9,13 +11,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router:Router, private route: ActivatedRoute,   private activatedRoute:ActivatedRoute) { }
+  constructor( public dialog: MatDialog,  private activatedRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
   }
 
   OpenPlay(){
-    alert("start!")
-    this.router.navigate(['/GameBoard'], { relativeTo: this.route });
+    this.dialog.open(DialogGetStartComponent);
   }
 }

@@ -1,2 +1,17 @@
-<h1>משחק חדש</h1>>
-<h3> ! יו איזה כיף !   </h3>>
+<h1>משחק חדש</h1>
+<h3> ! יו איזה כיף !   </h3>
+<form  [formGroup]="GemeForm">  
+<mat-form-field appearance="fill">
+    <mat-label>   שם שחקן א     </mat-label>
+    <input matInput required    formControlName ="Player1Name">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>   שם שחקן ב     </mat-label>
+    <input matInput required formControlName ="Player2Name">
+  </mat-form-field>
+
+
+  <button mat-stroked-button color="primary" (click) = "GetStarted()" > ! מ-ת-ח-י-ל-י-ם </button>
+
+</form>

@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { GameService } from '../game.service';
+
 import { Idiskit } from './Idiskit';
 import { Iplayer } from './Iplayer';
+// import {swal} from 'sweetalert';
+
 
 @Component({
   selector: 'app-game-board',
@@ -12,14 +17,14 @@ export class GameBoardComponent implements OnInit {
 
 
   player1: Iplayer = {
-    namePlayer: "מירי",
-    colorPlayer: "rgb(80, 198, 245)",
+    namePlayer: this.gameService.Player1Name,
+    colorPlayer: this.gameService.Player1Color,
     set: 0
   }
 
   player2: Iplayer = {
-    namePlayer: "שרי",
-    colorPlayer: " rgb(248, 131, 131)",
+    namePlayer: this.gameService.Player2Name,
+    colorPlayer:this.gameService.Player2Color,
     set: 0
   }
   NoPlayer: Iplayer = {
@@ -37,8 +42,11 @@ export class GameBoardComponent implements OnInit {
 
   begining = "rgb(255, 255, 255)";
 
-  colorButtom: string = "";
-  disAbleClick: boolean = false;
+  colorButtom: string | null = "";
+  disAbleClickInsert: boolean = false;
+  disAbleClickP1: boolean = true;
+  disAbleClickP2: boolean = false;
+
 
   diskis: Idiskit[][] = [
     [{ id: "A1", color: this.begining }, { id: "A2", color: this.begining }, { id: "A3:", color: this.begining }, { id: "A4", color: this.begining }, { id: "A5", color: this.begining }, { id: "A6", color: this.begining }],//0
@@ -59,18 +67,32 @@ export class GameBoardComponent implements OnInit {
     [0, 0, 0, 0, 0],
     [1, 2, 1, 1, 1],
   ]
+  currentStyles: Record<string, string> = {};
 
-  constructor(private router: Router, private route: ActivatedRoute,) { }
+  constructor(private router: Router, private route: ActivatedRoute,
+    public gameService: GameService) { }
 
   ngOnInit(): void {
   }
+
+  SetCurrentStyles(hh:string |null){
+    this.currentStyles = {
+    'background-color': hh? hh:"red"
+  }
+}
+
+
   Start(player: Iplayer) {
     this.playerNow = player;
-    this.disAbleClick = true;
+    this.disAbleClickInsert = true;
     this.colorButtom = this.playerNow.colorPlayer;
 
+
   }
-  Insert(_colorButtom: string, num: number) {
+  Insert( num: number) {
+
+    this.disAbleClickInsert = false;
+
 
     //הכנסת הדיסקית ללוח
     for (let index = 0; index < this.diskis[num].length; index++) {
@@ -140,7 +162,7 @@ export class GameBoardComponent implements OnInit {
 
         }
         //יורד בדיקת אלכסון 
-        if (j > 2 && j <6 && i < 6 && (this.diskis[i][j].color == player.colorPlayer // ?האם החוליה שאנו עומדים עליה בצבע הנוכחי 
+        if (j > 2 && j < 6 && i < 6 && (this.diskis[i][j].color == player.colorPlayer // ?האם החוליה שאנו עומדים עליה בצבע הנוכחי 
           && (this.diskis[i + 1][j - 1].color == player.colorPlayer) // ?וגם החוליה שמעליה באלכסון באותו הצבע?
           && (this.diskis[i + 2][j - 2].color == player.colorPlayer) // ?וגם החוליה שמעליה באלכסון באותו הצבע? 
 
@@ -157,16 +179,41 @@ export class GameBoardComponent implements OnInit {
 
         if (this.set_c == 4 || this.set_r == 4 || this.set_up_d == 1 || this.set_down_d == 1) {
           player.set = 1;
-          alert(player.namePlayer + " ניצחה! כל הכבוד! ");
-          alert("  חזרה לתפריט הראשי ");
 
-           this.router.navigate(['/HomeComponent'], { relativeTo: this.route });
+
+
+          setTimeout(() => {
+
+            Swal.fire({
+              icon: 'success',
+              title: player.namePlayer + " ניצחה! כל הכבוד! ",
+              showConfirmButton: false,
+              timer: 2500
+            })
+
+          }, 100);
+
+          setTimeout(() => {
+            // window.location.reload();
+            this.router.navigate(['/HomeComponent'], { relativeTo: this.route } );
+
+          }, 1600);
+
 
         }
+
       }
 
 
 
+    }
+    if (this.disAbleClickP1 == true) {
+      this.disAbleClickP1 = false
+      this.disAbleClickP2 = true
+    }
+    else {
+      this.disAbleClickP2 = false
+      this.disAbleClickP1 = true
     }
   }
 

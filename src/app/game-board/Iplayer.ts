@@ -1,7 +1,7 @@
 export interface Iplayer {
     id?:number;
-    namePlayer:string;
-    colorPlayer:string;
+    namePlayer:string | null ;
+    colorPlayer:string | null;
     mahalachim?:number;
     set:number;
 }

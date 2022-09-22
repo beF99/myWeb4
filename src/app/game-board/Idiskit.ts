@@ -1,6 +1,6 @@
 export interface Idiskit{
     id: string;
-    color: string;
+    color: string |null;
 
 }
 
