@@ -10,9 +10,9 @@
 
      </div>
      <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-      <mat-button-toggle value=player1.namePlayer style="background-color:{{player1.colorPlayer}}" (click)="Start(player1)">{{player1.namePlayer}}</mat-button-toggle>
+      <mat-button-toggle value=player1.namePlayer [style.background]="player1.colorPlayer"  *ngIf="disAbleClickP1==true" (click)="Start(player1)">{{player1.namePlayer}}</mat-button-toggle>
       <mat-button-toggle value="|">   |  </mat-button-toggle>
-      <mat-button-toggle value=player2.namePlayer style="background-color:{{player2.colorPlayer}}"  (click)="Start(player2)">  {{player2.namePlayer}}</mat-button-toggle>
+      <mat-button-toggle value=player2.namePlayer [style.background]=" player2.colorPlayer"  *ngIf="disAbleClickP2==true" (click)="Start(player2)">  {{player2.namePlayer}}</mat-button-toggle>
     </mat-button-toggle-group>
     <br><br><br><br>    <br><br>
 
@@ -22,13 +22,13 @@
                 <span  id="columns"  *ngFor="let item of diskis; index as i; ">  
                     <span  *ngFor="let item of diskis[i]; index as j; ">
                         <!-- <span>    -->
-                             <div class="diskit"  style="background-color:{{item.color}}" >  
+                             <div class="diskit"  [style.background]="item.color"  >  
                                 {{item.id}}
                           </div>
                         <!-- </span> -->
                          
                 </span>
-                <button   *ngIf="disAbleClick==true" mat-fab style="background-color:{{colorButtom}}" (click)="Insert(colorButtom, i)">   {{i}} </button>
+                <button   *ngIf="disAbleClickInsert==true" mat-fab [style.background]="colorButtom" (click)="Insert(i)">   {{i}} </button>
 
 
             </span>
