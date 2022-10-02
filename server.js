@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 
 const app = express();
-// var http = require('http').createServer(app);
+var http = require('http').createServer(app);
 
 
 // Serve only the static files form the dist directory
@@ -15,8 +15,8 @@ res.sendFile(path.join(__dirname+'/dist/my-web4/index.html'));
 });
 
 // Start the app by listening on the default Heroku port
-app.listen(process.env.PORT || 8080);
+// app.listen(process.env.PORT || 8080);
 
-// http.listen(3000, function () {
-//     console.log('listening on * localhost:3000');
-// });
+http.listen(process.env.PORT || 3000, function () {
+    console.log('listening on * localhost:3000');
+});
