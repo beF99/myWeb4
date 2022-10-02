@@ -1,6 +1,6 @@
 {
   "name": "my-web4",
-  "version": "0.0.0",
+  "version": "0.2.0",
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
@@ -51,5 +51,14 @@
   "engines": {
     "node": "16.15.0",
     "npm": "8.5.5"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/beF99/node-js-sample"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ]
 }
